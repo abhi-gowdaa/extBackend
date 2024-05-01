@@ -207,14 +207,7 @@ def extract_transcript(youtube_link):
          
     except Exception as e:
             return "no information avaliable"
-
-    
-
-
-
-
-
-  
+ 
    
 @app.get("/summary")
 async def test(url:str):
@@ -231,7 +224,7 @@ async def test(url:str):
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
-    
+ 
 
 @app.get("/ut")
 async def test():
@@ -250,7 +243,6 @@ async def test():
     #     raise HTTPException(status_code=400, detail="Invalid URL")
     
     return content
-
 
 
 @app.post("/webqa")
@@ -299,3 +291,7 @@ async def ytchat(question:str):
     except:
         raise HTTPException(status_code=500, detail="Internal Server Error")
         
+@app.get("/")
+async def test():
+    return {"api is running"}
+    
