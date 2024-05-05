@@ -223,24 +223,14 @@ async def test(url:str):
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
- 
-
 @app.get("/ut")
 async def test():
     global transcript
-    # Check if the input is a valid URL
-    # if not validators.url(url):
-    #     raise HTTPException(status_code=400, detail="Invalid URL")
-    
     return transcript
 
 @app.get("/wb")
 async def test():
     global content
-    # Check if the input is a valid URL
-    # if not validators.url(url):
-    #     raise HTTPException(status_code=400, detail="Invalid URL")
-    
     return content
 
 
@@ -264,10 +254,8 @@ async def ytranscript(url : str):
     global transcript
     try:
         transcript_text=extract_transcript(url)
-        print(transcript_text)
         if transcript_text:
             response=model.generate_content([prompt6,transcript_text])
-            print(response.text)
             return response.text
         
         else:
@@ -282,7 +270,6 @@ async def ytchat(question:str):
     try:
         if transcript:
             response=model.generate_content([prompt4,transcript,question])
-            print(response.text)
             return response.text 
         else:
             return {"please summarize first"}
