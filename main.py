@@ -215,7 +215,6 @@ async def test(url:str):
         status,content=scrweb(url)
         if status==200:
             response=genetate_gemini_content(prompt6,content)
-            print(response)
             return response
         else:
             return status
@@ -251,7 +250,6 @@ async def webchat(question:str):
     try:
         if content:
             response=model.generate_content([prompt4,content,question])
-            print(response.text)
             return response.text 
         else:
             return {"please summarize first"}
@@ -295,3 +293,10 @@ async def ytchat(question:str):
 async def test():
     return {"api is running"}
     
+@app.get("/rm")
+async def rm():
+    global transcript
+    global content
+    transcript=""
+    content=""
+    return
