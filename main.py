@@ -251,10 +251,10 @@ async def webchat(question:str):
 
 @app.get("/youtube")
 async def ytranscript(url : str):
-    global transcript
     try:
         transcript_text=extract_transcript(url)
         if transcript_text:
+            print(transcript_text)
             response=model.generate_content([prompt6,transcript_text])
             return response.text
         
