@@ -5,6 +5,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import google.generativeai as genai
 import os
+import asyncio
 import requests
 from bs4 import BeautifulSoup
 import validators
@@ -179,16 +180,15 @@ def genetate_gemini_content(prompt,content):
     response=model.generate_content([prompt,content])
     return response.text
 
-def extract_transcript(youtube_link):
+async def extract_transcript(youtube_link):
     try:
-        global transcript
         if not validators.url(youtube_link):
             status=400
             response="enter correct url"
             return status,response
         else:
             video_id=youtube_link.split("=")[1].split("&")[0]
-            transcript_text=YouTubeTranscriptApi.get_transcript(video_id,languages = [ 'en'])
+            transcript_text=await YouTubeTranscriptApi.get_transcript(video_id,languages = [ 'en'])
 
             for i in transcript_text:
                 transcript+=" "+i["text"]
@@ -197,13 +197,6 @@ def extract_transcript(youtube_link):
     except Exception as e:
             return "no information avaliable"
 
-    
-
-
-
-
-
-  
    
 @app.get("/summary")
 async def test(url:str):
@@ -225,19 +218,11 @@ async def test(url:str):
 @app.get("/ut")
 async def test():
     global transcript
-    # Check if the input is a valid URL
-    # if not validators.url(url):
-    #     raise HTTPException(status_code=400, detail="Invalid URL")
-    
     return transcript
 
 @app.get("/wb")
 async def test():
     global content
-    # Check if the input is a valid URL
-    # if not validators.url(url):
-    #     raise HTTPException(status_code=400, detail="Invalid URL")
-    
     return content
 
 
