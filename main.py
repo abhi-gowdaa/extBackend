@@ -188,10 +188,11 @@ async def extract_transcript(youtube_link):
             return status,response
         else:
             video_id=youtube_link.split("=")[1].split("&")[0]
-            transcript_text=await YouTubeTranscriptApi.get_transcript(video_id,languages = [ 'en'])
+            transcript_text=YouTubeTranscriptApi.get_transcript(video_id,languages = [ 'en'])
 
             for i in transcript_text:
                 transcript+=" "+i["text"]
+            print(transcript[:8])
             return transcript
          
     except Exception as e:
