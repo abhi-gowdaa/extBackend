@@ -188,7 +188,7 @@ def extract_transcript(youtube_link):
             return status,response
         else:
             video_id=youtube_link.split("=")[1].split("&")[0]
-            transcript_text=YouTubeTranscriptApi.get_transcript(video_id,languages = [ 'en'])
+            transcript_text=YouTubeTranscriptApi.get_transcript(video_id,languages = ['en'])
 
             for i in transcript_text:
                 transcript+=" "+i["text"]
@@ -244,7 +244,7 @@ async def webchat(question:str):
 
 
 @app.get("/youtube")
-async def ytranscript(url : str):
+async def ytranscript(url:str):
     transcript_text=extract_transcript(url)
     print(transcript_text)
     if transcript_text:
@@ -273,6 +273,11 @@ async def ytchat(question:str):
 @app.get("/")
 async def test():
     return {"status":"api is working"}
+    
+@app.post("/y")
+async def ytchat(url:str):
+    transcript=extract_transcript(url)
+    return transcript
 
 
 @app.get("/rm")
