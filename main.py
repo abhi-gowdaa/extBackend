@@ -180,7 +180,7 @@ def genetate_gemini_content(prompt,content):
     response=model.generate_content([prompt,content])
     return response.text
 
-async def extract_transcript(youtube_link):
+def extract_transcript(youtube_link):
     try:
         if not validators.url(youtube_link):
             status=400
@@ -245,7 +245,6 @@ async def webchat(question:str):
 
 @app.get("/youtube")
 async def ytranscript(url : str):
-    global transcript
     transcript_text=extract_transcript(url)
     print(transcript_text)
     if transcript_text:
