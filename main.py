@@ -29,7 +29,7 @@ app.add_middleware(
     allow_headers=['*']
 )
 
-model=genai.GenerativeModel("gemini-pro")
+model=genai.GenerativeModel("gemini-1.5-flash")
 
 
 prompt1="""
