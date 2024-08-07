@@ -10,7 +10,7 @@ Ensure you have the following prerequisites installed:
 
 1. Clone the repository:
     git clone https://github.com/abhi-gowdaa/extBackend.git 
-    cd web-x-backend
+    cd extBackend-main          (check the main  route once)
 
 
 2. Create a virtual environment and activate it:(optional)
